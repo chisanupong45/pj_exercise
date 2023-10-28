@@ -82,7 +82,6 @@ public class UserServiceImpl implements UserService {
 	    } else {
 	        // Handle the case where the user is not found
 	    }
-		
 	}
 
 }

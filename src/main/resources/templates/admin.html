@@ -53,7 +53,7 @@
 					<td th:text="${users.height}"></td>
 					<td th:text="${users.email}"></td>
 					<td th:text="${users.role.roleName}"></td>
-					<td>
+					<td class="d-flex gap-2">
 						<a th:href="@{/admin-page/update-user/{id}(id=${users.id})}" class="btn btn-primary">Update</a>
 						<form th:action="@{/admin-page/delete-user/{id}(id=${users.id})}" th:method="post">
 							<input type="submit" value="Delete" class="btn btn-danger">

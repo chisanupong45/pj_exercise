@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +20,8 @@ import com.cp.model.dto.ExerciseDto;
 import com.cp.model.dto.NutritionDto;
 import com.cp.model.dto.UserDto;
 import com.cp.service.*;
+
+import jakarta.validation.Valid;
 
 @Controller
 public class UserController {
@@ -78,6 +81,23 @@ public class UserController {
 		return "redirect:/user-page";
 	}
 	
+	@GetMapping("/user-page/update-food/{id}")
+    public String showUpdateFood(@PathVariable("id") Integer id, Model model) {
+        Nutrition nutrition = nutritionService.findById(id);
+        model.addAttribute("nutrition", nutrition);
+        return "update_food";
+    }
+	
+	@PostMapping("/user-page/update-food/{id}")
+    public String updateFood(@PathVariable("id") Integer id, @Valid Nutrition nutrition, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            return "update_food";
+        }
+
+        nutritionService.updateNutrition(id, nutrition);
+        return "redirect:/user-page";
+    }
+	
 	@PostMapping("/user-page/del-nutrition/{id}")
 	public String deleteUser(@PathVariable Integer id) {
 	    nutritionService.deleteNutrition(id);
@@ -98,6 +118,23 @@ public class UserController {
 	    exerciseService.save(exerciseDto);
 		return "redirect:/user-page";
 	}
+	
+	@GetMapping("/user-page/update-exercise/{id}")
+    public String showUpdateExercse(@PathVariable("id") Integer id, Model model) {
+        Exercise exercise = exerciseService.findById(id);
+        model.addAttribute("exercise", exercise);
+        return "update_exercise";
+    }
+	
+	@PostMapping("/user-page/update-exercise/{id}")
+    public String updateExercise(@PathVariable("id") Integer id, @Valid Exercise exercise, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            return "update_exercise";
+        }
+
+        exerciseService.updateExercise(id, exercise);
+        return "redirect:/user-page";
+    }
 	
 	@PostMapping("/user-page/del-exercise/{id}")
 	public String deleteExercise(@PathVariable Integer id) {

@@ -12,7 +12,7 @@
 <body>
 	<nav class="navbar navbar-light bg-light">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="/admin-page">User Dashboard</a>
+			<a class="navbar-brand" href="/user-page">User Dashboard</a>
 			<div class="d-flex align-items-center">
 				<span class="me-4">Welcome, [[${user.getFullname()}]]</span>
 				<span sec:authorize="isAuthenticated" class="ml-4">
@@ -47,8 +47,8 @@
 					<td th:text="${nutrition.quantity}"></td>
 					<td th:text="${nutrition.calories}"></td>
 					<td th:text="${nutrition.nutrition_date}"></td>
-					<td>
-						<a href="#" class="btn btn-primary">Update</a>
+					<td class="d-flex gap-2">
+						<a th:href="@{/user-page/update-food/{id}(id=${nutrition.id})}" class="btn btn-primary">Update</a>
 						<form th:action="@{/user-page/del-nutrition/{id}(id=${nutrition.id})}"  th:method="post">
 							<input type="submit" value="Delete" class="btn btn-danger">
 						</form>
@@ -81,12 +81,11 @@
 					<td th:text="${exercise.duration}"></td>
 					<td th:text="${exercise.calories_burned}"></td>
 					<td th:text="${exercise.exercise_date}"></td>
-					<td>
-						<a href="#" class="btn btn-primary">Update</a>
+					<td class="d-flex gap-2">
+						<a th:href="@{/user-page/update-exercise/{id}(id=${exercise.id})}" class="btn btn-primary">Update</a>
 						<form th:action="@{/user-page/del-exercise/{id}(id=${exercise.id})}" th:method="post">
 							<input type="submit" value="Delete" class="btn btn-danger">
 						</form>
-						
 					</td>
 				</tr>
 			</tbody>

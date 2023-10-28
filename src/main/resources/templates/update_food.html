@@ -4,12 +4,14 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>New Food</title>
+	<title>Update Food</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
 		integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
 		integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
 		crossorigin="anonymous" referrerpolicy="no-referrer" />
+		
 </head>
 
 <body>
@@ -28,23 +30,25 @@
 
 	<div class="container">
 		<a href="/user-page" class="btn btn-link mt-3 mb-2"><i class="fas fa-arrow-left"></i> Back</a>
-		<h1 class="mt-5">Add Nutrition</h1>
-		<form th:action="@{/user-page/add-food}" method="post">
+		<h1 class="mt-5">Update Nutrition</h1>
+		<form th:action="@{/user-page/update-food/{id}(id=${nutrition.id})}" method="post" role="form"
+			th:object="${nutrition}">
 			<div class="mb-3">
 				<label for="foodName" class="form-label">Food Name</label>
-				<input type="text" class="form-control" id="foodName" name="foodName" required>
+				<input th:field="*{foodName}" type="text" class="form-control" id="foodName" name="foodName" required>
 			</div>
 			<div class="mb-3">
 				<label for="quantity" class="form-label">Quantity</label>
-				<input type="number" class="form-control" id="quantity" name="quantity" required>
+				<input th:field="*{quantity}" type="number" class="form-control" id="quantity" name="quantity" required>
 			</div>
 			<div class="mb-3">
 				<label for="calories" class="form-label">Calories</label>
-				<input type="number" class="form-control" id="calories" name="calories" required>
+				<input th:field="*{calories}" type="number" class="form-control" id="calories" name="calories" required>
 			</div>
 			<div class="mb-3">
 				<label for="nutrition_date" class="form-label">Date</label>
-				<input type="date" class="form-control" id="nutrition_date" name="nutrition_date" required>
+				<input th:field="*{nutrition_date}" type="date" class="form-control" id="nutrition_date"
+					name="nutrition_date" required>
 			</div>
 			<button type="submit" class="btn btn-primary">Save</button>
 		</form>

@@ -1,6 +1,7 @@
 package com.cp.service.Impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,8 @@ import com.cp.model.dto.NutritionDto;
 import com.cp.repository.NutritionRepository;
 import com.cp.service.NutritionService;
 import com.cp.service.UserService;
+
+import jakarta.validation.Valid;
 
 @Service
 public class NutritionServiceImpl implements NutritionService{
@@ -48,6 +51,32 @@ public class NutritionServiceImpl implements NutritionService{
 	@Override
 	public void deleteNutrition(Integer id) {
 		this.nutritionRepository.deleteById(id);
+	}
+
+	@Override
+	public Nutrition findById(Integer id) {
+		Optional<Nutrition> optionalNutrition = this.nutritionRepository.findById(id);
+		if (optionalNutrition.isPresent()) {
+			return optionalNutrition.get();
+		} else {
+			// Handle the case where the user is not found
+			return null;
+		}
+	}
+
+	@Override
+	public void updateNutrition(Integer id, @Valid Nutrition nutrition) {
+		Optional<Nutrition> optionalNutrition = this.nutritionRepository.findById(id);
+	    if (optionalNutrition.isPresent()) {
+	        Nutrition existingNutrition = optionalNutrition.get();
+	        existingNutrition.setFoodName(nutrition.getFoodName());
+	        existingNutrition.setCalories(nutrition.getCalories());
+	        existingNutrition.setQuantity(nutrition.getQuantity());
+	        existingNutrition.setNutrition_date(nutrition.getNutrition_date());
+	        this.nutritionRepository.save(existingNutrition);
+	    } else {
+	        // Handle the case where the user is not found
+	    }
 	}
 
 }
