@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>New Food</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
+
+<body>
+	<nav class="navbar navbar-light bg-light">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="/admin-page">User Dashboard</a>
+			<div class="d-flex align-items-center">
+				<span sec:authorize="isAuthenticated" class="ml-4">
+					<a th:href="@{/logout}" class="btn btn-secondary text-light">
+						Logout
+					</a>
+				</span>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container">
+		<h1 class="mt-5">Add Nutrition</h1>
+		<form th:action="@{/user-page/add-food}" method="post">
+			<div class="mb-3">
+				<label for="foodName" class="form-label">Food Name</label>
+				<input type="text" class="form-control" id="foodName" name="foodName" required>
+			</div>
+			<div class="mb-3">
+				<label for="quantity" class="form-label">Quantity</label>
+				<input type="number" class="form-control" id="quantity" name="quantity" required>
+			</div>
+			<div class="mb-3">
+				<label for="calories" class="form-label">Calories</label>
+				<input type="number" class="form-control" id="calories" name="calories" required>
+			</div>
+			<div class="mb-3">
+				<label for="nutrition_date" class="form-label">Date</label>
+				<input type="date" class="form-control" id="nutrition_date" name="nutrition_date" required>
+			</div>
+			<button type="submit" class="btn btn-primary">Save</button>
+		</form>
+	</div>
+
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+		integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+		crossorigin="anonymous"></script>
+		
+</body>
+
+</html>
