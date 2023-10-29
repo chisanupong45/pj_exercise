@@ -26,13 +26,13 @@ public class User {
 	
 	private String password;
 	
-	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<Nutrition> nutrition;
 	
-	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<Exercise> exercise;
 
-	@OneToOne(fetch = FetchType.EAGER, optional = true)
+	@OneToOne(fetch = FetchType.EAGER, optional = false, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "role_id")
 	private Role role;
 	

@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cp.model.Exercise;
-import com.cp.model.Nutrition;
 import com.cp.model.User;
 import com.cp.model.dto.ExerciseDto;
 import com.cp.repository.ExerciseRepository;

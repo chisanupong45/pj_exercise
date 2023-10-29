@@ -40,7 +40,7 @@
 					<th scope="col">Weight</th>
 					<th scope="col">Height</th>
 					<th scope="col">Email</th>
-					<th scope="col">Password</th>
+					<th scope="col">Role</th>
 					<th scope="col">Action</th>
 				</tr>
 			</thead>
@@ -55,9 +55,7 @@
 					<td th:text="${users.role.roleName}"></td>
 					<td class="d-flex gap-2">
 						<a th:href="@{/admin-page/update-user/{id}(id=${users.id})}" class="btn btn-primary">Update</a>
-						<form th:action="@{/admin-page/delete-user/{id}(id=${users.id})}" th:method="post">
-							<input type="submit" value="Delete" class="btn btn-danger">
-						</form>
+						<a th:href="@{/admin-page/delete-user/{id}(id=${users.id})}" class="btn btn-danger">Delete</a>
 					</td>
 				</tr>
 			</tbody>

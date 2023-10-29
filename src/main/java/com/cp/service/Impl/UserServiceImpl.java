@@ -10,6 +10,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.cp.model.*;
 import com.cp.model.dto.UserDto;
+import com.cp.repository.ExerciseRepository;
+import com.cp.repository.NutritionRepository;
 import com.cp.repository.RoleRepository;
 import com.cp.repository.UserRepository;
 import com.cp.service.UserService;
@@ -27,6 +29,12 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private NutritionRepository nutritionRepository;
+	
+	@Autowired
+	private ExerciseRepository exerciseRepository;
 
 	@Override
 	public User save(UserDto userDto) {
@@ -52,9 +60,34 @@ public class UserServiceImpl implements UserService {
 		return this.userRepository.findByEmail(email);
 	}
 
+//	@Override
+//	public void deleteUser(Integer id) {
+//		this.userRepository.deleteById(id);
+//	}
+
 	@Override
 	public void deleteUser(Integer id) {
-		this.userRepository.deleteById(id);
+	    Optional<User> optionalUser = this.userRepository.findById(id);
+	    if (optionalUser.isPresent()) {
+	        User user = optionalUser.get();
+	        
+	        // Delete all Nutrition entities associated with the User
+	        List<Nutrition> nutritionList = user.getNutrition();
+	        for (Nutrition nutrition : nutritionList) {
+	            this.nutritionRepository.delete(nutrition);
+	        }
+	        
+	        // Delete all Exercise entities associated with the User
+	        List<Exercise> exerciseList = user.getExercise();
+	        for (Exercise exercise : exerciseList) {
+	            this.exerciseRepository.delete(exercise);
+	        }
+	            
+	        // Now you can delete the User
+	        userRepository.deleteById(id);
+	    } else {
+	        // Handle the case where the user is not found
+	    }
 	}
 
 	@Override
@@ -71,17 +104,17 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void updateUser(Integer id, @Valid User user) {
 		Optional<User> optionalUser = this.userRepository.findById(id);
-	    if (optionalUser.isPresent()) {
-	        User existingUser = optionalUser.get();
-	        existingUser.setFirstName(user.getFirstName());
-	        existingUser.setLastName(user.getLastName());
-	        existingUser.setWeight(user.getWeight());
-	        existingUser.setHeight(user.getHeight());
-	        existingUser.setEmail(user.getEmail());
-	        this.userRepository.save(existingUser);
-	    } else {
-	        // Handle the case where the user is not found
-	    }
+		if (optionalUser.isPresent()) {
+			User existingUser = optionalUser.get();
+			existingUser.setFirstName(user.getFirstName());
+			existingUser.setLastName(user.getLastName());
+			existingUser.setWeight(user.getWeight());
+			existingUser.setHeight(user.getHeight());
+			existingUser.setEmail(user.getEmail());
+			this.userRepository.save(existingUser);
+		} else {
+			// Handle the case where the user is not found
+		}
 	}
 
 }

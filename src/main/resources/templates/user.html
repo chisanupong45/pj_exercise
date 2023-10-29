@@ -49,9 +49,7 @@
 					<td th:text="${nutrition.nutrition_date}"></td>
 					<td class="d-flex gap-2">
 						<a th:href="@{/user-page/update-food/{id}(id=${nutrition.id})}" class="btn btn-primary">Update</a>
-						<form th:action="@{/user-page/del-nutrition/{id}(id=${nutrition.id})}"  th:method="post">
-							<input type="submit" value="Delete" class="btn btn-danger">
-						</form>
+						<a th:href="@{/user-page/del-nutrition/{id}(id=${nutrition.id})}" class="btn btn-danger">Delete</a>
 					</td>
 				</tr>
 			</tbody>
@@ -83,14 +81,11 @@
 					<td th:text="${exercise.exercise_date}"></td>
 					<td class="d-flex gap-2">
 						<a th:href="@{/user-page/update-exercise/{id}(id=${exercise.id})}" class="btn btn-primary">Update</a>
-						<form th:action="@{/user-page/del-exercise/{id}(id=${exercise.id})}" th:method="post">
-							<input type="submit" value="Delete" class="btn btn-danger">
-						</form>
+						<a th:href="@{/user-page/del-exercise/{id}(id=${exercise.id})}" class="btn btn-danger">Delete</a>
 					</td>
 				</tr>
 			</tbody>
 		</table>
-
 	</div>
 
 </body>

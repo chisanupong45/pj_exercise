@@ -1,7 +1,5 @@
 package com.cp.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.*;
 
 @Entity
@@ -13,6 +11,7 @@ public class Nutrition {
 	@Column(name = "nutrition_id")
 	private Integer id;
 	
+	@Column(name = "food_name")
 	private String foodName;
 	
 	private Integer quantity;
@@ -21,9 +20,8 @@ public class Nutrition {
 	
 	private String nutrition_date;
 
-	@JsonIgnore
-	@ManyToOne
-    @JoinColumn(name="user_id", nullable=false)
+	@ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name="user_id")
     private User user;
 
 	public Integer getId() {

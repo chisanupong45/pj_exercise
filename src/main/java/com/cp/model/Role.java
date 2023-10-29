@@ -14,7 +14,7 @@ public class Role {
 	@Column(name = "role_name")
 	private String roleName;
 	
-	@OneToOne(mappedBy = "role", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+	@OneToOne(mappedBy = "role")
     private User user;
 
 	

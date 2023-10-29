@@ -10,6 +10,10 @@ import com.cp.model.User;
 
 public class CustomUserDetail implements UserDetails {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private User user;
 	
 	public CustomUserDetail(User user) {

@@ -1,8 +1,5 @@
 package com.cp.model;
 
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.*;
 
 @Entity
@@ -14,6 +11,7 @@ public class Exercise {
 	@Column(name = "exercise_id")
 	private Integer id;
 	
+	@Column(name = "exercise_type")
 	private String exerciseType;
 	
 	private Integer duration;
@@ -22,9 +20,8 @@ public class Exercise {
 	
 	private String exercise_date;
 
-	@JsonIgnore
-	@ManyToOne
-    @JoinColumn(name="user_id", nullable=false)
+	@ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name="user_id")
     private User user;
 
 	public Integer getId() {

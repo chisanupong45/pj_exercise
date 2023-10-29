@@ -37,11 +37,6 @@ public class UserController {
 	
 	@Autowired
 	private ExerciseService exerciseService;
-
-	@RequestMapping("/")
-	public String root(Model model) {
-		return "index";
-	}
 	
 	@GetMapping("/user-page")
 	public String userPage(Model model, Principal principal) {
@@ -98,7 +93,7 @@ public class UserController {
         return "redirect:/user-page";
     }
 	
-	@PostMapping("/user-page/del-nutrition/{id}")
+	@GetMapping("/user-page/del-nutrition/{id}")
 	public String deleteUser(@PathVariable Integer id) {
 	    nutritionService.deleteNutrition(id);
 	    return "redirect:/user-page";
@@ -136,7 +131,7 @@ public class UserController {
         return "redirect:/user-page";
     }
 	
-	@PostMapping("/user-page/del-exercise/{id}")
+	@GetMapping("/user-page/del-exercise/{id}")
 	public String deleteExercise(@PathVariable Integer id) {
 	    exerciseService.deleteById(id);
 	    return "redirect:/user-page";

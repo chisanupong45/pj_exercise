@@ -9,13 +9,13 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import jakarta.validation.Valid;
+
 
 import com.cp.model.*;
 import com.cp.model.dto.UserDto;
@@ -57,12 +57,6 @@ public class AdminController {
 		return "add_user";
 	}
 	
-	@PostMapping("/admin-page/delete-user/{id}")
-	public String deleteUser(@PathVariable Integer id) {
-	    userService.deleteUser(id);
-	    return "redirect:/admin-page";
-	}
-	
 	@GetMapping("/admin-page/update-user/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         User user = userService.findById(id);
@@ -79,4 +73,10 @@ public class AdminController {
         userService.updateUser(id, user);
         return "redirect:/admin-page";
     }
+    
+    @GetMapping("/admin-page/delete-user/{id}")
+	public String deleteUser(@PathVariable("id") Integer id) {
+		userService.deleteUser(id);
+	    return "redirect:/admin-page";
+	}
 }
