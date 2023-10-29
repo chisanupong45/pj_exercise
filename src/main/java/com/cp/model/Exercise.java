@@ -20,7 +20,7 @@ public class Exercise {
 	
 	private String exercise_date;
 
-	@ManyToOne(cascade = CascadeType.REMOVE)
+	@ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name="user_id")
     private User user;
 
