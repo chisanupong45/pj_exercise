@@ -26,10 +26,10 @@ public class User {
 	
 	private String password;
 	
-	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private List<Nutrition> nutrition;
 	
-	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private List<Exercise> exercise;
 
 	@OneToOne(fetch = FetchType.EAGER, optional = false, cascade = CascadeType.PERSIST)
